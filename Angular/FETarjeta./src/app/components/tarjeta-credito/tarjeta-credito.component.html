@@ -1,0 +1,110 @@
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-lg-8 offset-lg-2">
+            <div class="card">
+                <div class="card-body ">
+                    <h3 class="titulo">Blue Bank</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="titulo">{{accion}}</h5>
+                    <form [formGroup]="form" (ngSubmit)="guardarTarjeta()">
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="input-group input-group-lg mb-3">
+                                    <span class="input-group-text" >
+                                        <i class="fas fa-user" 
+                                        [class.green-icon]="this.form.get('fistName')?.valid"
+                                        [class.red-icon]="this.form.get('fistName')?.invalid && this.form.get('fistName')?.touched"></i>
+                                    </span>
+                                    <input formControlName="fistName" type="text" class="form-control" placeholder="First name" >
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="input-group input-group-lg mb-3">
+                                    <span class="input-group-text" >
+                                        <i class="fas fa-user" 
+                                        [class.green-icon]="this.form.get('lastName')?.valid"
+                                        [class.red-icon]="this.form.get('lastName')?.invalid && this.form.get('lastName')?.touched"></i>
+                                    </span>
+                                    <input formControlName="lastName" type="text" class="form-control" placeholder="Last name" >
+                                </div>
+                            </div>
+                            
+                        </div>    
+                        <div class="input-group input-group-lg mb-3">
+                            <span class="input-group-text" >
+                                <i class="fas fa-calendar-alt"
+                                [class.green-icon]="this.form.get('brithDate')?.valid"
+                                [class.red-icon]="this.form.get('brithDate')?.invalid && this.form.get('brithDate')?.touched"></i>
+                            </span>
+                            <input formControlName="brithDate"  type="date" class="form-control" placeholder="Fecha nacimiento" >
+                        </div>                    
+                        <div class="input-group input-group-lg mb-3">
+                            <span class="input-group-text" >
+                                <i class="fas fa-credit-card"
+                                [class.green-icon]="this.form.get('numeroCuenta')?.valid"
+                                [class.red-icon]="this.form.get('numeroCuenta')?.invalid && this.form.get('numeroCuenta')?.touched"></i>
+                            </span>
+                            <input formControlName="numeroCuenta" maxlength="20" type="text" class="form-control" placeholder="Numero de cuenta" >
+                        </div>
+                        <div class="row">
+                            <div class="col-7">
+                                <div class="input-group input-group-lg mb-3">
+                                    <span class="input-group-text" >
+                                        <i class="fas fa-dollar-sign"
+                                        [class.green-icon]="this.form.get('dinero')?.valid"
+                                        [class.red-icon]="this.form.get('dinero')?.invalid && this.form.get('dinero')?.touched"></i>
+                                    </span>
+                                    <input formControlName="dinero" maxlength="7" type="text" class="form-control" placeholder="{{placeholderDinero}}"  >
+                                </div>  
+                            </div>
+                            <div class="col-5">
+                                <div class="input-group input-group-lg mb-3">
+                                    <span class="input-group-text" >
+                                        <i class="fas fa-key"
+                                        [class.green-icon]="this.form.get('password')?.valid"
+                                        [class.red-icon]="this.form.get('password')?.invalid && this.form.get('password')?.touched"></i>
+                                    </span>
+                                    <input formControlName="password" type="password" class="form-control" maxlength="4" placeholder="password" >
+                                </div>  
+                            </div>
+                        </div>
+                        <div class="d-grid gap-2">
+                            <button [disabled]="this.form.invalid" class="btn btn-primary btn-lg" type="submit">
+                                <i class="fas fa-database"></i> Aceptar
+                            </button>
+                        </div>
+                        
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="titulo">Listado Cuentas</h5>
+                        <table class="table">
+                            
+                            <tbody>
+                                <tr *ngFor="let tarjeta of listTarjetas">
+                                    <td>{{tarjeta.fistName}}</td>
+                                    <td>{{tarjeta.lastName}}</td>
+                                    <td>{{tarjeta.numeroCuenta}}</td>
+                                    <td>{{tarjeta.dinero | currency}}</td>
+                                    <td><i (click)="ConsignarDinero(tarjeta)" class="fas fa-money-bill-wave text-info" title="Consignar"></i></td>
+                                    <td><i (click)="RetirarDinero(tarjeta)" class="fas fa-hand-holding-usd text-danger" title="Retirar"></i></td>
+                                    <td><i (click)="ConsultarSaldo(tarjeta)" class="fas fa-search-dollar text-success" title="Consultar Saldo" ></i></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
